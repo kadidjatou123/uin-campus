@@ -32,5 +32,5 @@ target_link_libraries(uincampus_core PRIVATE uincampus_options)
 # ‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 # Application
 # ‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-add_executable(uin_campus src/main.cpp)
+add_executable(uin_campus app/main.cpp)
 target_link_libraries(uin_campus PRIVATE uincampus_core uincampus_options)
