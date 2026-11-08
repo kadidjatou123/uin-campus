@@ -3,4 +3,5 @@ build/
 compile_commands.json
 *.o
 .cache/
-
+test
+test_clang
