@@ -36,3 +36,5 @@ target_link_libraries(uincampus_core PRIVATE uincampus_options)
 # ‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 add_executable(uin_campus app/main.cpp)
 target_link_libraries(uin_campus PRIVATE uincampus_core uincampus_options)
+add_executable(statistiques_ue app/statistiques.cpp)
+target_link_libraries(statistiques_ue PRIVATE uincampus_core uincampus_options)
