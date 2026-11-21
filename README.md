@@ -254,3 +254,85 @@ Conclusion du TP3
 Les règles de notation, les fonctions de saisie et le calcul de la moyenne d’un étudiant ont été intégrés au projet UIN-Campus.
 
 Un programme indépendant de statistiques d’une UE a également été développé et testé. Les deux programmes ont été compilés avec CMake, et les modifications ont été enregistrées dans Git puis publiées sur GitHub.
+
+## TP4 — Carnet de notes et module de calculs
+
+### 1. Carnet de notes en mode menu
+
+Un programme de gestion de notes a été développé dans le fichier `app/carnet_notes.cpp`.
+
+Il permet de :
+- Ajouter une note.
+- Afficher les notes.
+- Modifier une note.
+- Supprimer une note.
+- Trier les notes par ordre croissant ou décroissant.
+- Afficher les statistiques.
+- Appliquer un bonus aux notes.
+
+Les fonctionnalités ont été organisées dans l'espace de noms `carnet`.
+
+### 2. Module de calculs de UIN-Campus
+
+Les fichiers suivants ont été ajoutés :
+
+- `include/uincampus/calculs.hpp`
+- `src/calculs.cpp`
+
+Ce module permet de calculer :
+- La somme des notes.
+- La moyenne simple.
+- La moyenne pondérée par les coefficients.
+- Le minimum et le maximum.
+- L'écart-type.
+- Le nombre de notes validées.
+- L'arrondi des résultats.
+
+### 3. Amélioration de la saisie
+
+Le fichier `src/saisie.cpp` a été amélioré avec des structures de retour et des liaisons structurées.
+
+### 4. Programme principal
+
+Le fichier `app/main.cpp` a été modifié pour :
+- Lire les arguments de la ligne de commande.
+- Afficher la version avec l'argument `--version`.
+- Calculer la moyenne pondérée d'un étudiant.
+- Afficher les statistiques et la mention.
+
+### 5. Compilation et exécution
+
+Formatage du code :
+
+```bash
+clang-format -i include/uincampus/*.hpp src/*.cpp app/*.cpp
+```
+
+Compilation :
+
+```bash
+cmake --build --preset debug
+```
+
+Exécution du carnet de notes :
+
+```bash
+./build/debug/carnet_notes
+```
+
+Exécution de UIN-Campus :
+
+```bash
+./build/debug/uin-campus
+```
+
+Affichage de la version :
+
+```bash
+./build/debug/uin-campus --version
+```
+
+### Conclusion du TP4
+
+Le carnet de notes et le module de calculs académiques ont été intégrés au projet UIN-Campus. Les programmes ont été compilés avec CMake et le calcul de la moyenne pondérée a été testé avec succès.
+```
