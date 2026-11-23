@@ -336,3 +336,130 @@ Affichage de la version :
 
 Le carnet de notes et le module de calculs académiques ont été intégrés au projet UIN-Campus. Les programmes ont été compilés avec CMake et le calcul de la moyenne pondérée a été testé avec succès.
 ```
+
+TP5 — Gestion de la mémoire et utilisation de std::vector
+
+1. Présentation du TP
+
+Objectif : comprendre la gestion dynamique de la mémoire en C++, découvrir les risques liés aux pointeurs et apprendre à utiliser le conteneur std::vector.
+
+Le TP est organisé en trois parties :
+
+* Partie A : création d’un tableau dynamique avec new[] et delete[].
+* Partie B : étude des problèmes liés à la copie superficielle.
+* Partie C : utilisation de std::vector.
+
+2. Partie A — Création d’un tableau dynamique
+
+2.1. Création du programme
+
+Le fichier tp5_memoire.cpp contient une structure appelée TableauDynamique.
+
+Cette structure possède trois éléments :
+
+* donnees : pointeur vers les données stockées en mémoire.
+* taille : nombre d’éléments présents dans le tableau.
+* capacite : nombre d’éléments que le tableau peut contenir.
+
+2.2. Gestion de la mémoire
+
+Trois fonctions ont été développées :
+
+* ajouter() : ajoute une valeur et augmente la capacité lorsque le tableau est plein.
+* liberer() : libère la mémoire avec delete[] et réinitialise les informations du tableau.
+* element() : permet d’accéder à un élément après vérification de l’indice avec assert.
+
+La capacité du tableau double lorsqu’il n’y a plus de place.
+
+2.3. Résultat obtenu
+
+Lors de l’ajout de dix valeurs, la capacité évolue de la manière suivante :
+
+Taille	Capacité
+1	4
+2	4
+3	4
+4	4
+5	8
+6	8
+7	8
+8	8
+9	16
+10	16
+
+3. Partie B — Étude de la copie superficielle
+
+Une expérience a été réalisée en copiant une structure contenant un pointeur.
+
+La copie superficielle recopie la valeur du pointeur, mais ne crée pas une nouvelle zone mémoire.
+
+Les deux structures pointent donc vers la même zone mémoire.
+
+Lorsque les deux structures tentent de libérer cette même zone, AddressSanitizer détecte une erreur de double libération (double-free).
+
+Une autre expérience a permis de constater qu’une mémoire qui n’est pas libérée provoque une fuite mémoire (memory leak).
+
+Enfin, l’utilisation de delete à la place de delete[] provoque une erreur, car la mémoire avait été réservée avec new[].
+
+Conclusion de la partie B : il faut respecter les règles d’allocation et de libération de la mémoire. Une copie superficielle d’une structure contenant un pointeur peut entraîner des erreurs de gestion mémoire.
+
+4. Partie C — Utilisation de std::vector
+
+4.1. Création du programme
+
+Le fichier tp5.cpp utilise le conteneur std::vector<double>.
+
+std::vector permet de gérer automatiquement un tableau dynamique sans avoir à utiliser directement new[] et delete[].
+
+La fonction push_back() permet d’ajouter des valeurs à la fin du vecteur.
+
+Les fonctions size() et capacity() permettent respectivement de connaître le nombre d’éléments et la capacité du vecteur.
+
+Une copie du vecteur a également été réalisée pour observer le comportement de la copie avec std::vector.
+
+4.2. Résultat obtenu
+
+Lors de l’ajout de dix valeurs, le programme a affiché :
+
+taille  1, capacité  1
+taille  2, capacité  2
+taille  3, capacité  4
+taille  4, capacité  4
+taille  5, capacité  8
+taille  6, capacité  8
+taille  7, capacité  8
+taille  8, capacité  8
+taille  9, capacité 16
+taille 10, capacité 16
+
+La stratégie d’augmentation de la capacité de std::vector dépend de l’implémentation de la bibliothèque standard.
+
+5. Compilation et exécution
+
+5.1. Compilation du programme de la partie A
+
+g++ -std=c++23 -Wall -Wextra -g -fsanitize=address,undefined -fno-omit-frame-pointer tp5_memoire.cpp -o tp5_memoire
+
+Exécution :
+
+./tp5_memoire
+
+5.2. Compilation du programme de la partie C
+
+g++ -std=c++23 -Wall -Wextra -g -fsanitize=address,undefined -fno-omit-frame-pointer tp5.cpp -o tp5
+
+Exécution :
+
+./tp5
+
+6. Conclusion générale du TP5
+
+Ce TP a permis de comprendre le fonctionnement de la mémoire dynamique en C++.
+
+La première partie a permis de créer et de gérer manuellement un tableau dynamique avec new[] et delete[].
+
+La deuxième partie a montré les risques liés à la copie superficielle, aux doubles libérations et aux fuites mémoire.
+
+La troisième partie a permis de découvrir std::vector, qui facilite la gestion des tableaux dynamiques et réduit les risques d’erreurs liés à la gestion manuelle de la mémoire.
+
+Bilan : l’utilisation de std::vector est généralement préférable à la gestion manuelle de la mémoire lorsque ce conteneur répond au besoin du programme.
